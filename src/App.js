@@ -18,8 +18,7 @@ class App extends React.Component {
           <Navbar.Brand href="#home">DeckBuilder</Navbar.Brand>
           <Nav className="mr-auto">
             <Form inline>
-              <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-              <Button variant="outline-info">Search</Button>
+              <FormControl type="text" placeholder="Filter" className="mr-sm-2" />
             </Form>
           </Nav>
           <input type="file" onChange={(e) => this.loadCollection(e)}/>
