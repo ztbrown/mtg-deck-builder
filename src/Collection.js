@@ -30,8 +30,8 @@ class Collection extends React.Component {
   render() {
     return (
       <>
-        {this.state.cards.map(card => (
-          <Card data={card}/> 
+        {this.state.cards.map((card, i) => (
+          <Card key={card.name} addCardToDeck={this.props.addCardToDeck} data={card}/> 
         ))}
       </>
     );

@@ -5,7 +5,8 @@ import Row from 'react-bootstrap/Row';
 class Card extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {card: props.data, image_url: "https://img.scryfall.com/cards/large/front/0/3/03c3dc23-d6f2-4209-82e1-a0b936c94231.jpg?1572892490" }
+    this.addCardToDeck = props.addCardToDeck
+    this.state = {card: props.data }
   }
 
   componentDidMount() {
@@ -13,7 +14,14 @@ class Card extends React.Component {
       .then(response => response.json())
       .then(data => {
         try {
-          this.setState({card: { name: this.state.card.name, image_url: data.image_uris.small}})
+          this.setState({card: { 
+            name: this.state.card.name, 
+            image_url: data.image_uris.small,
+            cmc: data.cmc,
+            color_identity: data.color_identity,
+            colors: data.colors,
+            mana_cost: data.mana_cost
+          }})
         }
         catch (e) {
           console.log(data)
@@ -21,10 +29,15 @@ class Card extends React.Component {
       });
   }
 
+  clickHandler() {
+    console.log(this.state)
+    this.addCardToDeck(this.state.card);
+  }
+
   render(){
     return (
       <span>
-        <img name={this.state.card.name} src={this.state.card.image_url} width="165px"/>
+        <img name={this.state.card.name} onClick={() => this.clickHandler()} src={this.state.card.image_url} width="165px"/>
       </span>
     );
   }
