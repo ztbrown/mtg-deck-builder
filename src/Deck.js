@@ -10,7 +10,7 @@ import CardListItem from './CardListItem'
 class Deck extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props.deck)
+    this.toggleView = this.props.toggleView
     this.state = {deck: props.deck }
   }
 
@@ -19,7 +19,7 @@ class Deck extends React.Component {
       <>
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand href="#home">Deck</Navbar.Brand>
-        <FontAwesomeIcon className="justify-content-end" icon={faAngleDoubleDown} right={'true'}/>
+        <FontAwesomeIcon onClick={() => this.toggleView()} className="justify-content-end" icon={faAngleDoubleDown} right={'true'}/>
       </Navbar>
       {this.state.deck.map((card, i) => (
         <CardListItem addCardToDeck={this.props.addCardToDeck} removeCardFromDeck={this.props.removeCardFromDeck} key={card.name} data={card}/>
