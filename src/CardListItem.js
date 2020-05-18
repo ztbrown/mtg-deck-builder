@@ -21,7 +21,7 @@ class CardListItem extends React.Component {
 
   render() {
     return (
-      <div><span onClick={() => this.addClickHandler()} class="badge badge-primary">{this.state.card.count}</span><span onClick={() => this.removeClickHandler()}>{this.state.card.name}</span></div>
+      <div><span onClick={() => this.addClickHandler()} class="badge badge-primary">{this.state.card.num_in_deck}</span><span onClick={() => this.removeClickHandler()}>{this.state.card.name}</span></div>
     );
   }
 }

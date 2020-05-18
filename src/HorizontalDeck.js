@@ -1,21 +1,25 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import CardListItem from './CardListItem'
 
 class HorizontalDeck extends React.Component {
   constructor(props) {
     super(props);
     this.state = {deck: props.deck}
-    this.toggleView = props.toggleView
   }
 
   render() {
     return (
-      <>
-      <Button onClick={() => this.toggleView()}>dock</Button>
-      {this.state.deck.map((card, i) => (
-        <p>{card.name}</p>
-      ))}
-      </>
+      <Row>
+        <Col lg={3}>
+        {this.state.deck.map((card, i) => (
+        <CardListItem addCardToDeck={this.props.addCardToDeck} removeCardFromDeck={this.props.removeCardFromDeck} key={card.name} data={card}/>
+        ))}
+      </Col>
+      <Col lg={9}>
+      </Col>
+      </Row>
     )
   }
 

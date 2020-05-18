@@ -9,7 +9,7 @@ class VerticalDeckView extends React.Component {
 
   render() {
     return(
-      <Col lg={3} right={'true'}>
+      <Col lg={3} right={'true'} className={'dock'}>
         <Deck toggleView={this.props.toggleView} addCardToDeck={this.props.addCardToDeck} removeCardFromDeck={this.props.removeCardFromDeck} deck={this.props.deck}/>
       </Col>
     );

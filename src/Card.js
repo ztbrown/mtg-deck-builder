@@ -20,7 +20,9 @@ class Card extends React.Component {
             cmc: data.cmc,
             color_identity: data.color_identity,
             colors: data.colors,
-            mana_cost: data.mana_cost
+            mana_cost: data.mana_cost,
+            count: parseInt(this.state.card.count),
+            num_in_deck: 0
           }})
         }
         catch (e) {
