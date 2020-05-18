@@ -16,7 +16,7 @@ class Collection extends React.Component {
 
   processCards(data) {
     var cards = data.split("\n");
-    cards = cards.map(card => { return  {name: card.split(/(?<=^\S+)\s/)[1], count: card.split(/x(.+)/)[0],}})
+    cards = cards.map(card => { return  {name: card.split(/(?<=^\S+)\s/)[1], count: card.split(/x(.+)/)[0], num_in_deck: 0}})
     this.setState({cards:cards})
   }
 

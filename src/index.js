@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Container>
+    <Container fluid>
       <App />
     </Container>
   </React.StrictMode>,

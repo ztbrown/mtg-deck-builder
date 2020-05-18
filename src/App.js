@@ -30,13 +30,15 @@ class App extends React.Component {
 
   addCardToDeck(cardToAdd) {
     let deck = this.state.deck
-    let card = Object.assign({}, cardToAdd)
-    card.count = 1
+    let card = cardToAdd 
     const index = deck.map(function(e) { return e.name; }).indexOf(card.name);
     if (index === -1){
       deck.push(card)
+      card.num_in_deck = 1
     } else {
-      deck[index].count += 1
+      if (deck[index].num_in_deck < card.count) {
+        deck[index].num_in_deck += 1
+      }
     }
     this.setState({deck: deck})
   }
@@ -44,16 +46,18 @@ class App extends React.Component {
   removeCardFromDeck(card) {
     let deck = this.state.deck
     const index = deck.map(function(e) { return e.name; }).indexOf(card.name);
-    if (deck[index] && deck[index].count > 1) {
-      deck[index].count -= 1
+    if (deck[index] && deck[index].num_in_deck > 1) {
+      deck[index].num_in_deck -= 1
     } else if (index != -1) {
+      deck[index].num_in_deck = 0
       deck.splice(index, 1)
     }
     this.setState({deck: deck})
   }
   render() {
     var upper = classNames({
-      upper: this.state.viewHorizontal
+      upper: this.state.viewHorizontal,
+      upperVertical: !this.state.viewHorizontal
     });
     console.log(upper)
     var lower = classNames({
@@ -61,21 +65,21 @@ class App extends React.Component {
     });
     return (
       <>
-        <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="#home">DeckBuilder</Navbar.Brand>
-          <Nav className="mr-auto">
-            <Form inline>
-              <FormControl type="text" placeholder="Filter" className="mr-sm-2" />
-            </Form>
-          </Nav>
-          <input type="file" onChange={(e) => this.loadCollection(e)}/>
-        </Navbar>
-        <Row className={ upper }>
-          <Col lg={this.state.viewHorizontal ? 12: 9} left={'true'}>
-            <Collection addCardToDeck={this.addCardToDeck} setHandler={handler => this.loadCollection = handler}></Collection>
-          </Col>
-          { this.state.viewHorizontal ? null : <VertcalDeckView toggleView={this.toggleView} addCardToDeck={this.addCardToDeck} removeCardFromDeck={this.removeCardFromDeck} deck={this.state.deck} /> }
-        </Row>
+      <Navbar bg="dark" variant="dark">
+        <Navbar.Brand href="#home">DeckBuilder</Navbar.Brand>
+        <Nav className="mr-auto">
+          <Form inline>
+            <FormControl type="text" placeholder="Filter" className="mr-sm-2" />
+          </Form>
+        </Nav>
+        <input type="file" onChange={(e) => this.loadCollection(e)}/>
+      </Navbar>
+      <Row>
+        <Col lg={this.state.viewHorizontal ? 12: 9} left={'true'} className={upper}>
+          <Collection addCardToDeck={this.addCardToDeck} setHandler={handler => this.loadCollection = handler}></Collection>
+        </Col>
+        { this.state.viewHorizontal ? null : <VertcalDeckView toggleView={this.toggleView} addCardToDeck={this.addCardToDeck} removeCardFromDeck={this.removeCardFromDeck} deck={this.state.deck} /> }
+      </Row>
       <Row className={ lower }>
         { this.state.viewHorizontal ? <HorizontalDeckView toggleView={this.toggleView} removeCardFromDeck={this.removeCardFromDeck} deck={this.state.deck}/> : null }
       </Row>
@@ -84,4 +88,4 @@ class App extends React.Component {
   }
 }
 
-  export default App;
+export default App;
